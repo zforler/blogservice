@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>文章发表</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <link rel="stylesheet" href="../frame/layui/css/layui.css">
+        <link rel="stylesheet" href="../frame/static/css/style.css">
+        <link rel="stylesheet" href="../css/mine.css">
+
+        <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+        <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+        <!--<script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>-->
+
+    </head>
+    <body style="width:800px; margin:0 auto;">
+    <div class="layui-form-item">
+        <div class="layui-input-block article-title">
+            <input id="article-title" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="文章标题" class="layui-input">
+        </div>
+    </div>
+
+    <div>
+        <div id="editor" type="text/plain" style="width:100%;height:500px;"></div>
+    </div>
+    <div class="layui-form layui-form-pane article-form">
+        <div class="layui-form-item">
+        <label class="layui-form-label">关键字</label>
+        <div class="layui-input-block">
+            <input id="article-keyword" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+        </div>
+    </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">文章分类</label>
+            <div class="layui-input-block">
+                <select id="article-type" name="interest" lay-filter="aihao">
+                    <option value=""></option>
+                    <option value="0">写作</option>
+                    <option value="1" selected="">阅读</option>
+                    <option value="2">游戏</option>
+                    <option value="3">音乐</option>
+                    <option value="4">旅行</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" pane="">
+            <label class="layui-form-label">文章标签</label>
+            <div class="layui-input-block" id="articel-label">
+                <input type="checkbox" class="label-item" name="like1[write]" lay-skin="primary" title="写作">
+                <input type="checkbox" class="label-item" name="like1[read]" lay-skin="primary" title="阅读">
+                <input type="checkbox" class="label-item" name="like1[game]" lay-skin="primary" title="游戏" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">文章评论</label>
+            <div class="layui-input-block">
+                <select id="article-comment" name="interest" lay-filter="aihao">
+                    <option value="1" selected="">开</option>
+                    <option value="2">关</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否公开</label>
+            <div class="layui-input-block">
+                <select id="article-private" name="interest" lay-filter="aihao">
+                    <option value="1" selected="">公开</option>
+                    <option value="2">私有</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">文章状态</label>
+            <div class="article-status">
+                编辑中
+            </div>
+        </div>
+
+        <div class="btn-con">
+            <button class="layui-btn" id="article-send">发布</button>
+            <button class="layui-btn layui-btn-normal"  id="article-save">保存</button>
+        </div>
+    </div>
+    </body>
+</html>
+
+<script src="../js/common.js" charset="utf-8"></script>
+<script charset="utf-8" src="../frame/ueditor/ueditor.config.js"></script>
+<script charset="utf-8" src="../frame/ueditor/ueditor.all.js"> </script>
+<script src="../js/jquery3.3.1.js"></script>
+<script src="../frame/layui/layui.js" charset="utf-8"></script>
+<script src="../js/article.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('demo',{
+            tool: ['left', 'center', 'right', '|', 'face']
+        });
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function(data){
+            layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            });
+            return false;
+        });
+
+
+    });
+
+</script>

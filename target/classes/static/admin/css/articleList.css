@@ -1,0 +1,10 @@
+.article-head {
+    background-color: #ccc;
+}
+.article {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 45px;
+    border-bottom: #ccc thin solid;
+}

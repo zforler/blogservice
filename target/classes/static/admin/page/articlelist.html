@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章列表</title>
+    <link rel="stylesheet" href="../frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../frame/static/css/style.css">
+    <link rel="stylesheet" href="../css/mine.css">
+    <link rel="stylesheet" href="../css/articleList.css">
+</head>
+<body>
+<form class="layui-form layui-form-pane article-form" action="">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">关键字</label>
+            <div class="layui-input-inline">
+                <input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">文章类型</label>
+            <div class="layui-input-inline">
+                <select name="interest" lay-filter="aihao">
+                    <option value=""></option>
+                    <option value="0">写作</option>
+                    <option value="1" selected="">阅读</option>
+                    <option value="2">游戏</option>
+                    <option value="3">音乐</option>
+                    <option value="4">旅行</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+            <label class="mine-label">--</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <button class="layui-btn layui-btn-primary">查询</button>
+    </div>
+
+</form>
+<ul class="article-head">
+    <li class="article" data-id>
+        <span class="article-title">标题</span>
+        <span class="article-time">发布时间</span>
+        <span class="article-view">浏览量</span>
+    </li>
+</ul>
+<ul class="articleList" id="articleList">
+    <li class="article" data-id>
+        <span class="article-title">asdf</span>
+        <span class="article-time">asdf</span>
+        <span class="article-view">asdf</span>
+    </li>
+</ul>
+
+</body>
+</html>
+<script src="../frame/layui/layui.js" charset="utf-8"></script>
+<script src="../js/jquery3.3.1.js"></script>
+<script src="../js/articleList.js" charset="utf-8"></script>
+<script type="text/javascript">
+    // 配置扩展方法路径
+    layui.config({
+        base: './../frame/static/js/'   // 模块目录
+    }).extend({                         // 模块别名
+        vip_nav: 'vip_nav'
+        , vip_tab: 'vip_tab'
+    });
+    // layui方法
+    layui.use([ 'form', 'layer', 'vip_table', 'laydate'], function () {
+
+        // 操作对象
+        var form = layui.form
+            , table = layui.table
+            , layer = layui.layer
+            , vipTable = layui.vip_table
+            , $ = layui.jquery
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+    });
+</script>

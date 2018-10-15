@@ -1,0 +1,44 @@
+.article-title{
+    margin-top:10px;
+    margin-left: 0;
+}
+.article-form{
+    margin-top:20px;
+}
+.btn-con{
+    text-align: center;
+    margin-bottom: 100px;
+}
+.mine-label {
+    float: left;
+    line-height: 35px;
+    padding-right: 10px;
+}
+.article-status{
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 35px;
+    color: #999;
+}
+/******************************************article***********************************************/
+.label-ul {
+    display: flex;
+}
+.article-label {
+    padding: 8px 10px;
+    border: #ccc thin solid;
+    margin: 5px 5px;
+}
+.article-label-select {
+    border: red thin solid;
+}
+#label-input {
+    height: 25px;
+    margin-left: 5px;
+}
+#ok-btn,#delete-btn{
+    height: 25px;
+    width: 70px;
+}
